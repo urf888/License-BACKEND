@@ -1,0 +1,8 @@
+C:\Users\ptudo\License-BACKEND\License-BACKEND\License-BACKEND\PlanAlimentatieSiAntrenament\obj\Debug\net8.0\PlanAlimentatieSiAntrenament.csproj.AssemblyReference.cache
+C:\Users\ptudo\License-BACKEND\License-BACKEND\License-BACKEND\PlanAlimentatieSiAntrenament\obj\Debug\net8.0\PlanAlimentatieSiAntrenament.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ptudo\License-BACKEND\License-BACKEND\License-BACKEND\PlanAlimentatieSiAntrenament\obj\Debug\net8.0\PlanAlimentatieSiAntrenament.AssemblyInfoInputs.cache
+C:\Users\ptudo\License-BACKEND\License-BACKEND\License-BACKEND\PlanAlimentatieSiAntrenament\obj\Debug\net8.0\PlanAlimentatieSiAntrenament.AssemblyInfo.cs
+C:\Users\ptudo\License-BACKEND\License-BACKEND\License-BACKEND\PlanAlimentatieSiAntrenament\obj\Debug\net8.0\PlanAlimentatieSiAntrenament.csproj.CoreCompileInputs.cache
+C:\Users\ptudo\License-BACKEND\License-BACKEND\License-BACKEND\PlanAlimentatieSiAntrenament\obj\Debug\net8.0\PlanAlimentatieSiAntrenament.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ptudo\License-BACKEND\License-BACKEND\License-BACKEND\PlanAlimentatieSiAntrenament\obj\Debug\net8.0\PlanAlimentatieSiAntrenament.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ptudo\License-BACKEND\License-BACKEND\License-BACKEND\PlanAlimentatieSiAntrenament\obj\Debug\net8.0\PlanAlimentatieSiAntrenament.sourcelink.json

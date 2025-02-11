@@ -1,0 +1,6 @@
+@PlanAlimentatieSiAntrenament_HostAddress = http://localhost:5282
+
+GET {{PlanAlimentatieSiAntrenament_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
