@@ -56,11 +56,35 @@ namespace LoginAPI.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            var existingUser = await _context.Users.FindAsync(id);
+            if (existingUser == null)
+            {
+                return NotFound();
+            }
 
+            // Actualizăm doar câmpurile care trebuie
+            existingUser.Username = user.Username;
+            existingUser.Email = user.Email;
+
+            // Dacă s-a primit o parolă nouă, aplicăm hashing
+            if (!string.IsNullOrEmpty(user.PasswordHash))
+            {
+                // Verificăm dacă parola este deja hashuită
+                if (!user.PasswordHash.StartsWith("$2a$") && !user.PasswordHash.StartsWith("$2b$"))
+                {
+                    existingUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+                    Console.WriteLine($"Noua parolă hashuită: {existingUser.PasswordHash}");
+                }
+                else
+                {
+                    Console.WriteLine("Parola este deja hashuită, nu aplicăm hashing.");
+                }
+            }
+
+            await _context.SaveChangesAsync();
             return NoContent();
         }
+
 
         // DELETE: api/User/5
         [HttpDelete("{id}")]

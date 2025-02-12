@@ -1,68 +1,68 @@
-using BCrypt.Net;
-using LoginAPI.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using LoginAPI.Services; // Importă serviciile necesare
+    using BCrypt.Net;
+    using LoginAPI.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
+    using LoginAPI.Services; // Importă serviciile necesare
 
-namespace LoginAPI.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AuthController : ControllerBase
+    namespace LoginAPI.Controllers
     {
-        private readonly IUserLoginService _userLoginService; // 🔹 Adaugă această linie
-
-        public AuthController(IUserLoginService userLoginService) // 🔹 Injectează serviciul în constructor
+        [Route("api/[controller]")]
+        [ApiController]
+        public class AuthController : ControllerBase
         {
-            _userLoginService = userLoginService;
-        }
+            private readonly IUserLoginService _userLoginService; // 🔹 Adaugă această linie
 
-        // POST: api/auth/login
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest loginModel)
-        {
-            if (loginModel == null || string.IsNullOrEmpty(loginModel.Email) || string.IsNullOrEmpty(loginModel.Password))
+            public AuthController(IUserLoginService userLoginService) // 🔹 Injectează serviciul în constructor
             {
-                return BadRequest(new { message = "Email and password are required." });
+                _userLoginService = userLoginService;
             }
 
-            var user = await _userLoginService.AuthenticateUserAsync(loginModel.Email, loginModel.Password);
-
-            if (user == null)
+            // POST: api/auth/login
+            [HttpPost("login")]
+            public async Task<IActionResult> Login([FromBody] LoginRequest loginModel)
             {
-                return Unauthorized(new { message = "Invalid email or password." });
-            }
-
-            var token = "your_generated_jwt_token";  // Placeholder pentru un token JWT
-
-            return Ok(new { token, user });
-        }
-
-        // ✅ Adaugă endpoint-ul de înregistrare
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest registerModel)
-        {
-            if (registerModel == null || string.IsNullOrEmpty(registerModel.Email) ||
-                string.IsNullOrEmpty(registerModel.Password) || string.IsNullOrEmpty(registerModel.Username))
-            {
-                return BadRequest("All fields are required.");
-            }
-
-            try
-            {
-                var newUser = new User
+                if (loginModel == null || string.IsNullOrEmpty(loginModel.Email) || string.IsNullOrEmpty(loginModel.Password))
                 {
-                    Username = registerModel.Username,
-                    Email = registerModel.Email
-                };
+                    return BadRequest(new { message = "Email and password are required." });
+                }
 
-                var createdUser = await _userLoginService.CreateUserAsync(newUser, registerModel.Password);
-                return Ok(new { message = "User registered successfully", user = createdUser });
+                var user = await _userLoginService.AuthenticateUserAsync(loginModel.Email, loginModel.Password);
+
+                if (user == null)
+                {
+                    return Unauthorized(new { message = "Invalid email or password." });
+                }
+
+                var token = "your_generated_jwt_token";  // Placeholder pentru un token JWT
+
+                return Ok(new { token, user });
             }
-            catch (Exception ex)
+
+            // ✅ Adaugă endpoint-ul de înregistrare
+            [HttpPost("register")]
+            public async Task<IActionResult> Register([FromBody] RegisterRequest registerModel)
             {
-                return BadRequest(ex.Message);
+                if (registerModel == null || string.IsNullOrEmpty(registerModel.Email) ||
+                    string.IsNullOrEmpty(registerModel.Password) || string.IsNullOrEmpty(registerModel.Username))
+                {
+                    return BadRequest("All fields are required.");
+                }
+
+                try
+                {
+                    var newUser = new User
+                    {
+                        Username = registerModel.Username,
+                        Email = registerModel.Email
+                    };
+
+                    var createdUser = await _userLoginService.CreateUserAsync(newUser, registerModel.Password);
+                    return Ok(new { message = "User registered successfully", user = createdUser });
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
         }
     }
-}

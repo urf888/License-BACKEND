@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PlanAlimentatieSiAntrenament")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ab3d3c536f0babb47f54e2c392d1b574d3e5ae8b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c0b29f6fdf0099a96fde2e6db899af98abc986b")]
 [assembly: System.Reflection.AssemblyProductAttribute("PlanAlimentatieSiAntrenament")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PlanAlimentatieSiAntrenament")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

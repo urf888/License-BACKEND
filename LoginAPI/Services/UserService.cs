@@ -3,6 +3,7 @@ using LoginAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BCrypt.Net;
 
 namespace LoginAPI.Services
 {
@@ -47,12 +48,33 @@ namespace LoginAPI.Services
             if (existingUser == null) return null;
 
             existingUser.Username = user.Username;
-            existingUser.PasswordHash = user.PasswordHash;
             existingUser.Email = user.Email;
+
+            // Debugging: Afișăm parola înainte de hashing
+            Console.WriteLine($"Parola primită: {user.PasswordHash}");
+
+            // Dacă frontend-ul trimite o parolă nouă, o hash-uim
+            if (!string.IsNullOrEmpty(user.PasswordHash))
+            {
+                // Verificăm dacă parola este deja hashuită
+                if (!user.PasswordHash.StartsWith("$2a$") && !user.PasswordHash.StartsWith("$2b$"))
+                {
+                    existingUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+                    Console.WriteLine($"Parola hashuită: {existingUser.PasswordHash}");
+                }
+                else
+                {
+                    Console.WriteLine("Parola este deja hashuită.");
+                }
+            }
 
             await _context.SaveChangesAsync();
             return existingUser;
         }
+
+
+
+
 
         public async Task<bool> DeleteUserAsync(int id)
         {
